@@ -5,7 +5,8 @@ Mount project dotNet Core in Linux
 ```bash
 # Build and run
 docker build -t webasp1 .
-docker run -d -p 8080:8080 -e  DbConnectionString=""  --name webasp1_container webasp1
+docker run -d -p 8080:8080 -e DbConnectionString=$CONNECTION --name webasp1_container webasp1
+docker buildx build --platform linux/amd64 -t 381492032511.dkr.ecr.us-east-1.amazonaws.com/dotnetapp:v2 --push .
 
 # Check files in container
 docker exec -it <containerid> /bin/sh
@@ -97,3 +98,5 @@ k exec -it <pod-name> -- /bin/sh
 ```
 
 ## Build container app
+
+kubectl rollout restart deployment dotnet
